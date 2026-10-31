@@ -35,3 +35,19 @@ function reg(){const nick=$('nick').value.trim();if(!nick){alert('請輸入暱�
 S.r={nick,v:$('vil').value,no:'DP-'+String(Date.now()).slice(-6),d:new Date().toLocaleDateString('zh-TW')};save();done('reg')}
 function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 map();render();
+
+const A=[
+{b:'farm',n:'酸菜阿伯AI',r:'農產小幫手',c:'#6fbf4a',h:'#f2c9a0',hat:'#d9b44a',g:'芥菜收成囉！醃漬時程、天氣提醒交給我。'},
+{b:'gov',n:'稻米小農AI',r:'鄉政公告白話員',c:'#e0b04a',h:'#f5d2b0',hat:'#7a5a2a',g:'公所公告我幫你翻成白話、大字版。'},
+{b:'sub',n:'補助小幫手AI',r:'補助比對',c:'#5aa0e0',h:'#f1c7a2',hat:'#2a4a7a',g:'告訴我你的身分與產業，我幫你列可申請的補助清單。'},
+{b:'care',n:'長照關懷AI',r:'關懷排班',c:'#e07a7a',h:'#f3cfb3',hat:'#fff',g:'送餐排班、訪視紀錄我來整理，有異狀馬上通知社工。'},
+{b:'tour',n:'觀光導覽AI',r:'導覽員',c:'#b07ae0',h:'#f0c8a0',hat:'#e05a8a',g:'有半天嗎？我幫你排一條大埤小旅行路線！'},
+{b:'env',n:'環境守護AI',r:'環境回報',c:'#4ac0b0',h:'#f2c9a0',hat:'#2a8a3a',g:'看到路燈壞、積水？拍照給我，我幫你分類追蹤。'}];
+function av(a,s=1){return `<g transform="scale(${s})" shape-rendering="crispEdges"><rect x="4" y="0" width="16" height="5" fill="${a.hat}" stroke="#0b141d"/><rect x="5" y="5" width="14" height="10" fill="${a.h}" stroke="#0b141d"/><rect x="8" y="8" width="2" height="3" fill="#0b141d"/><rect x="14" y="8" width="2" height="3" fill="#0b141d"/><rect x="10" y="12" width="4" height="1" fill="#c0504a"/><rect x="4" y="15" width="16" height="9" fill="${a.c}" stroke="#0b141d"/><rect x="10" y="17" width="4" height="4" fill="#fff"/><text x="12" y="20.5" text-anchor="middle" style="font-size:3.5px;fill:#0b141d">AI</text></g>`}
+function say(i){const a=A[i];$('bubble').innerHTML=`<b>${a.n}</b>（${a.r}）<span class="tag">虛擬</span><br>「${a.g}」`;
+const m=$('mapbubble');if(m){const b=B.find(x=>x.id===a.b);m.setAttribute('transform',`translate(${b.x+40},${b.y-95})`);m.querySelector('text').textContent=a.g.length>16?a.g.slice(0,16)+'…':a.g;m.style.display=''}}
+function agents(){$('agentlist').innerHTML=A.map((a,i)=>`<button class="agent" onclick="say(${i})"><svg viewBox="-1 -1 26 26" width="56" height="56">${av(a)}</svg><span>${a.n}</span><small>${a.r}</small></button>`).join('');
+let g=A.map((a,i)=>{const b=B.find(x=>x.id===a.b);return `<g class="agt" transform="translate(${b.x+48},${b.y+20})" onclick="say(${i})" role="button" aria-label="${a.n}">${av(a,1.6)}</g>`}).join('');
+g+=`<g id="mapbubble" style="display:none"><rect x="-10" y="0" width="230" height="30" rx="8" fill="#fff" stroke="#0b141d" stroke-width="2"/><text x="105" y="20" text-anchor="middle" style="font-size:14px;fill:#0b141d"></text></g>`;
+$('map').insertAdjacentHTML('beforeend',g)}
+agents();
