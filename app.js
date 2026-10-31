@@ -51,3 +51,27 @@ let g=A.map((a,i)=>{const b=B.find(x=>x.id===a.b);return `<g class="agt" transfo
 g+=`<g id="mapbubble" style="display:none"><rect x="-10" y="0" width="230" height="30" rx="8" fill="#fff" stroke="#0b141d" stroke-width="2"/><text x="105" y="20" text-anchor="middle" style="font-size:14px;fill:#0b141d"></text></g>`;
 $('map').insertAdjacentHTML('beforeend',g)}
 agents();
+
+const P=[{k:'old',n:'70 歲獨居酸菜農',d:['農業','長照','健康關懷','就醫','交通','子女聯繫']},{k:'young',n:'返鄉青年',d:['就業','農業','住','樂']},{k:'fam',n:'雙薪育兒家庭',d:['就學','育','交通','食']},{k:'new',n:'新住民媽媽',d:['就學','就業','育','衣','健康關懷']}];
+const N={'就學':['補助小幫手AI','提醒您：孩子的學雜費與助學補助申請期間到了，我可以陪您確認資格（以學校與教育部公告為準）。'],
+'就業':['補助小幫手AI','有符合您條件的在地職缺與職訓課程，要不要幫您整理清單？（可洽台灣就業通）'],
+'農業':['酸菜阿伯AI','芥菜種植季到了：農業補助與天災救助的公告一出來，我會馬上通知您（以農業部公告為準）。'],
+'就醫':['長照關懷AI','明天有門診，需要我幫您預約就醫交通接送嗎？'],
+'交通':['觀光導覽AI','今天的公車班次與社區接送時刻已經整理好了。'],
+'食':['長照關懷AI','社區據點這週有共餐，要幫您報名嗎？'],
+'衣':['環境守護AI','村辦公處有二手衣物交流，需要的話可以登記領取。'],
+'住':['補助小幫手AI','住宅修繕與租金補貼的資訊已經整理好（以內政部公告為準）。'],
+'行':['觀光導覽AI','出門前提醒：天氣與路況已經幫您確認好了。'],
+'育':['補助小幫手AI','育兒津貼與托育資源已經整理好，要我一步一步帶您申請嗎？'],
+'樂':['觀光導覽AI','這週末村裡有活動，要幫您加進行事曆嗎？'],
+'長照':['長照關懷AI','您可能符合長照2.0服務資格，可以撥 1966 長照專線申請評估，要我幫您準備資料嗎？'],
+'健康關懷':['長照關懷AI','早安！今天量血壓了嗎？量好回報數字，我幫您記錄。'],
+'子女聯繫':['長照關懷AI','']};
+let per=P[0],sel=new Set(P[0].d);
+function lineUI(){$('personas').innerHTML=P.map((p,i)=>`<button class="chip ${p===per?'on':''}" onclick="per=P[${i}];sel=new Set(per.d);lineUI()">${p.n}</button>`).join('');
+$('needs').innerHTML=Object.keys(N).map(k=>`<button class="chip ${sel.has(k)?'on':''}" onclick="sel.has('${k}')?sel.delete('${k}'):sel.add('${k}');lineUI()">${k}</button>`).join('');
+const ok=$('kidok').checked;
+$('chat').innerHTML=`<div class="msg sys">👤 ${per.n}（虛擬）· 示範資料</div>`+[...sel].map(k=>{let [a,t]=N[k];if(k==='子女聯繫')t=ok?'您已同意：這週的健康量測摘要會傳給您登記的子女。':'⚠️ 您還沒同意通知子女，所以不會傳送任何訊息。';return `<div class="msg"><b>${a}</b>｜${k}<br>${t}</div>`}).join('');
+const D=[['登記鄉民（模擬）',128],['本週健康回報',86],['待追蹤：長照',12],['待追蹤：就醫接送',7],['同意通知子女',41],['農業補助提醒',53]];
+$('dash').innerHTML=D.map(([n,v])=>`<div><span>${v}</span>${n}</div>`).join('')}
+$('kidok').onchange=lineUI;lineUI();
