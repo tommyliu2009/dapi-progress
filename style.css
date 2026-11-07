@@ -11,6 +11,7 @@ h2{font-size:18px;margin:4px 0 8px}
 .bld{cursor:pointer;transition:transform .15s}.bld:hover,.bld.sel{transform:translateY(-6px)}
 .bld text{font-size:15px;font-weight:700;fill:#fff;paint-order:stroke;stroke:#0b141d;stroke-width:3px}
 .panel{margin-top:8px;background:#0b141d;padding:10px;border-radius:6px;min-height:90px;font-size:15px;line-height:1.6}
+.panel a{color:#9fd0ff;font-weight:700}
 .tag{font-size:12px;background:#ffcf5c;color:#3a2a00;border-radius:4px;padding:1px 6px;vertical-align:middle}
 .small{font-size:13px;color:#b9c6d2}
 input,button{font:inherit;padding:10px;border-radius:6px;border:2px solid #0b141d}input{width:100%;margin:4px 0}
@@ -44,3 +45,23 @@ footer{text-align:center;padding:20px 10px 40px}.ad{display:inline-block;backgro
 .privacy{background:#1a2a3a;border-left:5px solid #f7d34a;border-radius:6px;padding:6px 10px;margin-top:8px}
 @media(max-width:700px){.lgrid{grid-template-columns:1fr}.dash{grid-template-columns:repeat(2,1fr)}}
 #kidok{width:auto;margin-right:6px}
+h3{font-size:16px;margin:12px 0 6px}
+.entry{display:inline-flex;align-items:center;justify-content:center;margin-top:8px;max-width:min(100% - 8px,440px);background:#6fbf4a;color:#0b141d;font-weight:700;padding:10px 14px;border-radius:8px;border:3px solid #0b141d;text-decoration:none;box-shadow:3px 3px 0 #0b141d;line-height:1.4;text-align:center}
+.herotext a{color:#1d4e89;font-weight:700}
+#friend{scroll-margin-top:8px}
+.pass{background:linear-gradient(135deg,#e7f2ff,#c9e7a0);color:#1c2a14;border-radius:10px;padding:12px;border:3px dashed #2a4a7a}
+.pass .no{font-family:monospace;font-size:20px;font-weight:700}
+.stamp{margin-top:6px;font-weight:700;font-size:13px}
+.friendactions{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.taskcard{background:#1a2a3a;border:2px solid #0b141d;border-radius:8px;padding:8px;margin:6px 0;line-height:1.55}
+.err{color:#ffd0d0;font-size:14px;min-height:1.2em;margin:4px 0}
+.fake{border:3px dashed #e07070;background:#2a1616;border-radius:8px;padding:8px;margin-top:8px}
+.fake .dash span{color:#ffb4b4}
+.fake .dash div{background:#3a2020}
+.src{word-break:break-all;line-height:1.7}
+.src a{color:#9fd0ff}
+.log{list-style:none;padding:0;margin:0}
+.log li{padding:6px 0;border-bottom:1px dashed #3d5468;font-size:14px}
+.tasks a.minibtn{display:inline-block;background:#6fbf4a;color:#0b141d;font-weight:700;text-decoration:none;padding:6px 10px;border:2px solid #0b141d;border-radius:6px}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,.bld:focus-visible{outline:3px solid #ffcf5c;outline-offset:2px}
+#friend label{display:block;margin-top:6px}

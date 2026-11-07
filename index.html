@@ -1,14 +1,15 @@
 <!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>「大埤新進度」虛擬鄉鎮</title>
-<meta name="description" content="用遊戲畫面看 AI 工作流如何協助大埤鄉，登記成為虛擬鄉民。非官方示範網站。">
+<meta name="description" content="用遊戲畫面看 AI 工作流如何協助大埤鄉，登記成為虛擬鄉民，或加入民間示範「大埤之友」。非官方示範網站。">
 <link rel="stylesheet" href="style.css"></head><body>
-<div class="notice">⚠️ 非官方示範網站：本站不是雲林縣大埤鄉公所官方網站，地圖上的工作流進度皆為<b>示範資料</b>。</div>
+<div class="notice">⚠️ 非官方示範網站：本站不是雲林縣大埤鄉公所官方網站。地圖進度與「大埤之友」皆為<b>民間示範</b>，不是戶籍、投票權或法定居民資格，也不收集個人資料。</div>
 <header><h1>🌾 「大埤新進度」虛擬鄉鎮</h1><p>用 AI 工作流治理大埤鄉 · 成為虛擬鄉民</p>
-<div id="hud" class="hud"></div></header>
+<div id="hud" class="hud"></div>
+<a class="entry" href="#friend">🤝 大埤之友（民間示範，不住大埤也能參與）</a></header>
 <section class="hero"><figure><img src="images/suancai.jpg" alt="酸菜照片" loading="eager" width="579" height="800"><figcaption>🥬 酸菜（照片非攝於大埤）</figcaption></figure>
 <figure><img src="images/rice.jpg" alt="台灣稻田照片" width="800" height="533"><figcaption>🌾 稻米（台灣稻田，攝於花蓮瑞穗，非大埤）</figcaption></figure>
-<div class="herotext"><b>大埤：酸菜的故鄉</b><br>酸菜占全台產量八成以上（來源：大埤鄉衛生所、台南區農改場）；特產還有芥菜、稻米、花生、蝴蝶蘭、劍蘭。</div></section>
+<div class="herotext"><b>大埤：酸菜的故鄉</b><br>酸菜占全台產量八成以上（來源：大埤鄉衛生所、台南區農改場）；特產還有芥菜、稻米、花生、蝴蝶蘭、劍蘭。<br><a href="#friend">不住大埤也能長期參與：大埤之友（民間示範）</a></div></section>
 <main>
 <section class="mapwrap"><h2>🗺️ 虛擬大埤（點建築看 AI 工作流）</h2>
 <svg id="map" viewBox="0 0 800 520" role="img" aria-label="大埤鄉虛擬地圖"></svg>
@@ -23,11 +24,45 @@
 <div><b>③ 模擬推播</b><div id="chat" class="chat"></div></div></div>
 <h3>📊 鄉公所關懷儀表板 <span class="tag">示範資料</span></h3><div id="dash" class="dash"></div>
 <div class="privacy"><b>🔒 隱私原則</b><ul><li>遵守《個人資料保護法》，事先取得本人明確同意</li><li>只收必要的最少資料</li><li>本人同意後才會通知子女</li><li>資料絕不販售，也不會挪作他用</li><li>隨時可以退出，並刪除資料</li></ul>
-<p class="small">真的上線時，必須用鄉公所自己的官方 LINE 帳號，也要先經過法務與個資審查。</p></div>
+<p class="small">真的上線時，必須用鄉公所自己的官方 LINE 帳號，也要先經過法務與個資審查。本區與「大埤之友」都沒有串接 LINE。</p></div>
 <div class="privacy"><b>🚀 真實上線需要</b><ul><li>LINE 官方帳號與 Messaging API</li><li>與鄉公所正式合作，並安排專人追蹤</li><li>個資影響評估、資安與法律審查</li><li>與衛生所、長照、社福、農會、就業服務等單位串接資料</li></ul></div></section>
+<section class="card wide" id="friend" aria-labelledby="friend-title">
+<h2 id="friend-title">🤝 大埤之友 <span class="tag">民間示範</span></h2>
+<p>大埤之友是民間示範，不是雲林縣大埤鄉公所的制度，也還沒有正式上線。不住在大埤也可以長期參與。它不是戶籍、沒有投票權、不是法定居民資格，也不承諾福利、補助、居民待遇或特產。</p>
+<p class="small">只留暱稱，以及你在這台裝置上的操作。不收集身分證或 My Number，不連 LINE，不寄信，也不把資料送到伺服器。清除時只刪本機資料。</p>
+<div class="privacy"><b>日本概念，只供對照</b>
+<p>日本總務省所說的「關係人口」，不是遷入定居的人，也不是觀光而來的人，而是以多種方式和一個地方及其居民往來的人。官方正在準備「故鄉居民登錄制度」（ふるさと住民登録制度）。</p>
+<p>官方頁面上的「每年 3 次以上指定擔當活動」「進階登錄最多 3 個自治體」「進階須以 My Number 卡確認本人」，只作為背景。大埤之友不採用這些門檻，也不提供相對應的權益。</p>
+<p>日程只轉述已查核的官方說法：2026-10-30 總務大臣記者會表示，制度<b>預計</b> 2027 年 3 月開始；參加自治體的系統利用申請，自當天至 2027-01-29。同日報道資料寫明預定於該年度內開始。2027 年 3 月仍在日本的 2026 年度之內。這不是大埤的申請或上線日期。同一查核日，問答頁仍寫「以 2026 年度內開始為目標」。</p>
+<p>貼文另有一組自治體參與家數與比例。本次在總務省公開網頁（含上述記者會紀錄）查無原始統計，故不採用該組數字。查核日期：2026-11-07。</p>
+</div>
+<p id="friendlive" class="small" aria-live="polite"></p>
+<div id="friendapp"></div>
+<h3>你的本機成果指標 <span class="tag">非真成效</span></h3>
+<p class="small">三欄分開：有沒有登錄、實際參與幾次、服務幾小時。只登錄不會增加時數。數字只統計這台裝置上的操作，未傳送，不是大埤鄉的人數或時數。</p>
+<div id="friendmetrics" class="dash" aria-label="本機成果指標，非真成效"></div>
+<div class="fake">
+<b>虛構對照（非真成效）</b>
+<p class="small">下面三個數字是寫死的例子，用來說明不要只看登錄人數。不是大埤的人、不是服務實績，不能引用。</p>
+<div class="dash" aria-label="虛構對照數字，非真成效"><div><span>8</span>登錄筆數（虛構）</div><div><span>3</span>實際參與（虛構）</div><div><span>7.5</span>服務時數（虛構）</div></div>
+</div>
+<h3>示範參與紀錄 <span class="tag">只在本機</span></h3>
+<ul id="friendlog" class="log"></ul>
+<div id="friendclear"></div>
+<div class="src small"><b>已查核的官方來源（2026-11-07）</b><br>
+<a href="https://www.soumu.go.jp/main_sosiki/jichi_gyousei/c-gyousei/kankeijinkou.html">總務省｜關係人口・故鄉居民</a><br>
+<a href="https://www.soumu.go.jp/furusatojuumin/">總務省｜故鄉居民登錄制度導覽</a><br>
+<a href="https://www.soumu.go.jp/furusatojuumin/about.html">總務省｜制度概要（兩種登錄、每年 3 次）</a><br>
+<a href="https://www.soumu.go.jp/furusatojuumin/faq.html">總務省｜問答（進階最多 3 自治體、My Number、擔當活動例）</a><br>
+<a href="https://www.soumu.go.jp/menu_news/kaiken/01koho01_02001587.html">總務省｜2026-10-30 藤井總務大臣記者會（預計 2027 年 3 月開始、申請至 1 月 29 日）</a><br>
+<a href="https://www.soumu.go.jp/menu_news/s-news/01gyosei07_02000185.html">總務省｜2026-10-30 大臣書簡報道（預定該年度內開始）</a>
+</div>
+</section>
 <section class="card" id="reg"><h2>🪪 成為虛擬鄉民</h2><div id="regbox"></div>
-<p class="small">資料只存在你這台裝置（localStorage），不會傳到任何伺服器。虛擬鄉民證不是戶籍、也不是官方身分。</p></section>
-<section class="card"><h2>🎯 鄉民任務與徽章</h2><ul id="tasks" class="tasks"></ul></section>
+<p class="small">資料只存在你這台裝置（localStorage），不會傳到任何伺服器。虛擬鄉民證不是戶籍、也不是官方身分。不住大埤、仍想長期參與的人，請用上面的「大埤之友」。</p></section>
+<section class="card"><h2>🎯 鄉民任務與徽章</h2>
+<p class="small">含「大埤之友」示範徽章。進度只存在這台裝置，不是真成效。</p>
+<ul id="tasks" class="tasks"></ul></section>
 <section class="card"><h2>📈 新進度看板 <span class="tag">示範資料</span></h2><div id="board"></div></section>
 <section class="card"><h2>🗳️ 共識牆 <span class="tag">示範</span></h2><p class="small">學 vTaiwan／Pol.is：只表態同意或不同意，不吵架。</p><div id="wall"></div></section>
 <section class="card"><h2>📍 真實的大埤</h2><ul class="facts">
@@ -36,7 +71,7 @@
 <li>「酸菜的故鄉」，酸菜占全台產量八成以上（來源：大埤鄉衛生所、台南區農改場）</li>
 <li>特產：芥菜、蝴蝶蘭、劍蘭、花生、稻米</li></ul>
 <p class="small">15 村：三結、北鎮、松竹、南和、聯美、大德、吉田、怡然、嘉興、豐田、北和、西鎮、尚義、興安、豐岡</p></section>
-<section class="card"><h2>🌏 靈感來源</h2><p class="small">山古志村數位村民、愛沙尼亞 e-Residency、首爾 Metaverse Seoul 意見信箱、赫爾辛基 Decidim 參與式預算、UN-Habitat Block by Block（Minecraft 共同設計）、台灣 vTaiwan。</p></section>
+<section class="card"><h2>🌏 靈感來源</h2><p class="small">山古志村數位村民、愛沙尼亞 e-Residency、首爾 Metaverse Seoul 意見信箱、赫爾辛基 Decidim 參與式預算、UN-Habitat Block by Block（Minecraft 共同設計）、台灣 vTaiwan。日本總務省的關係人口與故鄉居民登錄只作概念參考，規則不套用到大埤（見<a href="#friend">大埤之友</a>）。</p></section>
 </main>
 <footer><div class="ad">仁禾管理顧問<br>renhe74123@gmail.com<br>LINE 官方帳號：@891tcxhu</div>
 <p class="small">非官方示範網站，與大埤鄉公所無隸屬關係。AI 代理人為虛擬角色。</p>
