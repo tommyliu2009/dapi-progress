@@ -1,40 +1,57 @@
 const B=[
-{id:'gov',n:'鄉政公告',e:'🏛️',x:400,y:150,c:'#e0b04a',p:72,d:'AI 每天整理公所公告，自動改寫成白話、長輩版大字與語音，推播到 LINE。'},
-{id:'sub',n:'補助申請',e:'📝',x:600,y:250,c:'#5aa0e0',p:55,d:'鄉民問「我能申請什麼補助？」AI 依身分與產業比對中央與縣府補助，產生申請清單與文件檢核。'},
-{id:'farm',n:'酸菜農產',e:'🥬',x:200,y:250,c:'#6fbf4a',p:64,d:'芥菜與酸菜產銷：AI 彙整天氣、行情，提醒農友採收與醃漬時程，協助小農上架電商。'},
-{id:'care',n:'長照關懷',e:'🧓',x:400,y:330,c:'#e07a7a',p:41,d:'AI 協助志工排班送餐、整理關懷訪視紀錄，異常狀況立即提醒社工（個資不離開機構）。'},
-{id:'tour',n:'觀光導覽',e:'🗺️',x:600,y:410,c:'#b07ae0',p:48,d:'AI 導覽員：依停留時間推薦路線、宗教文化地圖與在地小吃，鄉民打卡集章。'},
-{id:'env',n:'環境守護',e:'♻️',x:200,y:410,c:'#4ac0b0',p:37,d:'鄉民拍照回報路燈、垃圾、積水，AI 自動分類、定位並追蹤處理進度。'}];
+{id:'gov',n:'鄉政公告',x:400,y:150,c:'#e0b04a',p:72,d:'AI 每天整理公所公告，自動改寫成白話、長輩版大字與語音，推播到 LINE。'},
+{id:'sub',n:'補助申請',x:600,y:250,c:'#5aa0e0',p:55,d:'鄉民問「我能申請什麼補助？」AI 依身分與產業比對中央與縣府補助，產生申請清單與文件檢核。'},
+{id:'farm',n:'酸菜農產',x:200,y:250,c:'#6fbf4a',p:64,d:'芥菜與酸菜產銷：AI 彙整天氣、行情，提醒農友採收與醃漬時程，協助小農上架電商。'},
+{id:'care',n:'長照關懷',x:400,y:330,c:'#e07a7a',p:41,d:'AI 協助志工排班送餐、整理關懷訪視紀錄，異常狀況立即提醒社工（個資不離開機構）。'},
+{id:'tour',n:'觀光導覽',x:600,y:410,c:'#b07ae0',p:48,d:'AI 導覽員：依停留時間推薦路線、宗教文化地圖與在地小吃，鄉民打卡集章。'},
+{id:'env',n:'環境守護',x:200,y:410,c:'#4ac0b0',p:37,d:'鄉民拍照回報路燈、垃圾、積水，AI 自動分類、定位並追蹤處理進度。'}];
 const S=JSON.parse(localStorage.getItem('dapi')||'{"r":null,"t":{},"v":{}}');const save=()=>localStorage.setItem('dapi',JSON.stringify(S));
 if(!S.t||typeof S.t!=='object')S.t={};
 if(!S.v||typeof S.v!=='object')S.v={};
 if(!Array.isArray(S.log))S.log=[];
 const $=id=>document.getElementById(id);
+function marker(id){
+const ink='fill="#f3f0e6" stroke="#0b141d" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"';
+const line='fill="none" stroke="#0b141d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+const g={
+gov:`<rect x="6" y="2.5" width="12" height="17" rx="1.2" ${ink}/><path d="M9 7h6M9 11h6M9 15h4" ${line}/>`,
+sub:`<rect x="7" y="4" width="11" height="16" rx="1.2" ${ink}/><rect x="9.2" y="2" width="6.6" height="3.2" rx="1" ${ink}/><path d="M9.4 12.2l2 2 3.6-4" ${line}/>`,
+farm:`<path d="M12 21c0-8 6-13 10-14-1 8-6 14-10 14zM12 21C12 13 6 9 2 8c1 8 6 13 10 13z" ${ink}/><path d="M12 21V10" ${line}/>`,
+care:`<circle cx="12" cy="6.2" r="3.5" ${ink}/><path d="M5.5 21v-4.2c0-3 2.6-4.6 6.5-4.6s6.5 1.6 6.5 4.6V21z" ${ink}/>`,
+tour:`<path d="M12 22s7-6.2 7-11.2a7 7 0 1 0-14 0C5 15.8 12 22 12 22z" ${ink}/><circle cx="12" cy="10.6" r="2.1" fill="#0b141d"/>`,
+env:`<path d="M7.2 8h9.6l-.8 12H8z" ${ink}/><path d="M5 8h14M9.5 4.2h5" ${line}/><path d="M10.2 11.2v5.2M13.8 11.2v5.2" ${line}/>`
+};
+return `<g aria-hidden="true" transform="translate(-16.2,-16.2) scale(1.35)">${g[id]}</g>`}
+function plant(kind,x,y){
+if(kind==='rice')return `<g aria-hidden="true" transform="translate(${x},${y})"><path d="M0 2v-18M-5-4c2.2-3 2.2-7 0-10M5-2c-2.2-3-2.2-7 0-10" fill="none" stroke="#1d5524" stroke-width="2.2" stroke-linecap="round"/></g>`;
+if(kind==='leaf')return `<g aria-hidden="true" transform="translate(${x},${y})"><path d="M0 2c1-6 6-10 12-11-2 6-6 11-12 11z" fill="#3e8c36" stroke="#0b141d" stroke-width="1.4" transform="rotate(-20)"/></g>`;
+if(kind==='bloom')return `<g aria-hidden="true" transform="translate(${x},${y})"><path d="M0 2v-8" stroke="#1d5524" stroke-width="2" stroke-linecap="round"/><circle cx="0" cy="-11" r="4.2" fill="#e48ab0" stroke="#0b141d" stroke-width="1.4"/></g>`;
+return `<g aria-hidden="true" transform="translate(${x},${y})"><path d="M-1.4 2v-7h2.8V2z" fill="#6b4428"/><circle cx="0" cy="-11" r="6.5" fill="#2c7434" stroke="#0b141d" stroke-width="1.4"/></g>`}
 function iso(b){const w=70,h=35,H=60;return `<g class="bld" data-id="${b.id}" tabindex="0" role="button" aria-label="${b.n}">
 <polygon points="${b.x},${b.y-H} ${b.x+w},${b.y-H+h} ${b.x},${b.y-H+2*h} ${b.x-w},${b.y-H+h}" fill="${b.c}" stroke="#0b141d" stroke-width="3"/>
 <polygon points="${b.x-w},${b.y-H+h} ${b.x},${b.y-H+2*h} ${b.x},${b.y+2*h-10} ${b.x-w},${b.y+h-10}" fill="${b.c}" filter="brightness(.75)" stroke="#0b141d" stroke-width="3" style="filter:brightness(.75)"/>
 <polygon points="${b.x+w},${b.y-H+h} ${b.x},${b.y-H+2*h} ${b.x},${b.y+2*h-10} ${b.x+w},${b.y+h-10}" fill="${b.c}" stroke="#0b141d" stroke-width="3" style="filter:brightness(.55)"/>
-<text x="${b.x}" y="${b.y-H+h+8}" text-anchor="middle" style="font-size:26px">${b.e}</text>
+<g transform="translate(${b.x},${b.y-H+h-2})">${marker(b.id)}</g>
 <text x="${b.x}" y="${b.y+2*h+12}" text-anchor="middle">${b.n}</text></g>`}
 function map(){let g='';for(let i=0;i<9;i++)for(let j=0;j<9;j++){const x=400+(i-j)*50,y=40+(i+j)*28;g+=`<polygon points="${x},${y} ${x+50},${y+28} ${x},${y+56} ${x-50},${y+28}" fill="${(i+j)%2?'#8fd16a':'#7cc45a'}" stroke="#5aa83a"/>`}
 g+=`<path d="M60 470 Q400 380 760 470" stroke="#e8d9a8" stroke-width="14" fill="none" opacity=".8"/>`;
-['🌾','🌾','🥬','🥬','🌸','🌳','🌳'].forEach((e,k)=>g+=`<text x="${80+k*105}" y="${505-(k%2)*30}" style="font-size:26px">${e}</text>`);
+[['rice',80,500],['rice',185,472],['leaf',290,500],['leaf',395,472],['bloom',500,500],['tree',605,472],['tree',710,500]].forEach(([k,x,y])=>g+=plant(k,x,y));
 $('map').innerHTML=g+B.map(iso).join('');
 $('map').querySelectorAll('.bld').forEach(el=>{const f=()=>show(el.dataset.id);el.onclick=f;el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}}})}
 function show(id){const b=B.find(x=>x.id===id);document.querySelectorAll('.bld').forEach(e=>e.classList.toggle('sel',e.dataset.id===id));
 const rel={farm:'農務、地方產業',care:'長者數位陪伴',sub:'專業諮詢'};
-const extra=rel[id]?`<br><a href="#friend">🤝 大埤之友示範任務：${rel[id]}</a>`:'';
-$('panel').innerHTML=`<b>${b.e} ${b.n}</b> <span class="tag">示範資料</span><br>${b.d}${extra}<div class="bar"><i style="width:${b.p}%"></i></div>建置進度 ${b.p}%`;
+const extra=rel[id]?`<br><a href="#friend">大埤之友示範任務：${rel[id]}</a>`:'';
+$('panel').innerHTML=`<b>${b.n}</b> <span class="tag">示範資料</span><br>${b.d}${extra}<div class="bar"><i style="width:${b.p}%"></i></div>建置進度 ${b.p}%`;
 done('visit_'+id,false);if(B.every(x=>S.t['visit_'+x.id]))done('all');render()}
-const T=[{k:'reg',n:'登記成為虛擬鄉民',b:'🪪 新鄉民'},{k:'visit_farm',n:'參觀酸菜農產站',b:'🥬 酸菜之友'},{k:'all',n:'走遍六棟 AI 建築',b:'🧭 探險家'},{k:'vote',n:'在共識牆表態一次',b:'🗳️ 發聲者'},{k:'trip',n:'實地造訪大埤（自行勾選）',b:'🚲 回鄉人',m:1},{k:'friend_basic',n:'登錄大埤之友（一般）',b:'🤝 大埤之友'},{k:'friend_partner',n:'完成一次大埤之友參與任務',b:'🧤 參與夥伴'},{k:'friend_hours',n:'大埤之友示範時數累計 4 小時',b:'⏱️ 時數紀錄'}];
+const T=[{k:'reg',n:'登記成為虛擬鄉民',b:'新鄉民'},{k:'visit_farm',n:'參觀酸菜農產站',b:'酸菜之友'},{k:'all',n:'走遍六棟 AI 建築',b:'探險家'},{k:'vote',n:'在共識牆表態一次',b:'發聲者'},{k:'trip',n:'實地造訪大埤（自行勾選）',b:'回鄉人',m:1},{k:'friend_basic',n:'登錄大埤之友（一般）',b:'大埤之友'},{k:'friend_partner',n:'完成一次大埤之友參與任務',b:'參與夥伴'},{k:'friend_hours',n:'大埤之友示範時數累計 4 小時',b:'時數紀錄'}];
 function done(k,r=true){if(!S.t[k]){S.t[k]=Date.now();save()}if(r)render()}
 function render(){const r=S.r;$('regbox').innerHTML=r?`<div class="rcard"><div>大埤虛擬鄉民證 <span class="tag">示範</span></div><div class="no">No. ${r.no}</div><div>暱稱：${esc(r.nick)}</div><div>認同村：${esc(r.v)}</div><div class="small" style="color:#4a5a3a">登記日 ${r.d}</div></div><button onclick="if(confirm('確定刪除本機的鄉民證？')){S.r=null;delete S.t.reg;save();render()}" style="margin-top:8px;background:#ccc">刪除</button>`:
 `<input id="nick" maxlength="20" placeholder="你的暱稱"><select id="vil" style="width:100%;padding:10px;border-radius:6px">${'三結,北鎮,松竹,南和,聯美,大德,吉田,怡然,嘉興,豐田,北和,西鎮,尚義,興安,豐岡'.split(',').map(v=>`<option>${v}村</option>`).join('')}</select><button style="width:100%;margin-top:6px" onclick="reg()">領取鄉民證</button>`;
-$('tasks').innerHTML=T.map(t=>`<li class="${S.t[t.k]?'done':''}"><span>${S.t[t.k]?'✅':'⬜'} ${t.n}</span><span>${S.t[t.k]?t.b:(t.m?`<button onclick="done('trip')">我去過了</button>`:(t.k.startsWith('friend_')?'<a class="minibtn" href="#friend">前往</a>':'🔒'))}</span></li>`).join('');
-const n=T.filter(t=>S.t[t.k]).length;$('hud').innerHTML=`<span>🪪 ${r?'No.'+r.no:'訪客'}</span><span>🏅 徽章 ${n}/${T.length}</span><span>⭐ 經驗 ${n*20}</span>`;
-$('board').innerHTML=B.map(b=>`<div>${b.e} ${b.n}　${b.p}%</div><div class="bar"><i style="width:${b.p}%"></i></div>`).join('');
+$('tasks').innerHTML=T.map(t=>{const done=!!S.t[t.k];const side=done?t.b:(t.m?`<button onclick="done('trip')">我去過了</button>`:(t.k.startsWith('friend_')?'<a class="minibtn" href="#friend">前往</a>':'<span class="lock">未解鎖</span>'));return `<li class="${done?'done':''}"><span><span class="state">${done?'完成':'未完成'}</span>${t.n}</span><span>${side}</span></li>`}).join('');
+const n=T.filter(t=>S.t[t.k]).length;$('hud').innerHTML=`<span>${r?'鄉民證 No.'+r.no:'訪客'}</span><span>徽章 ${n}/${T.length}</span><span>經驗 ${n*20}</span>`;
+$('board').innerHTML=B.map(b=>`<div><span class="swatch" style="background:${b.c}" aria-hidden="true"></span>${b.n}　${b.p}%</div><div class="bar"><i style="width:${b.p}%"></i></div>`).join('');
 const W=['大埤酸菜應該有自己的線上品牌館','長輩需要大字版、語音版的公所公告','每村活動中心應設 AI 服務小幫手','虛擬鄉民可以認養一塊芥菜田'];
-$('wall').innerHTML=W.map((w,i)=>`<div class="wl">${w}<br><button onclick="vote(${i},1)">👍 同意${S.v[i]===1?' ✓':''}</button><button onclick="vote(${i},-1)">👎 不同意${S.v[i]===-1?' ✓':''}</button></div>`).join('')}
+$('wall').innerHTML=W.map((w,i)=>`<div class="wl">${w}<br><button class="${S.v[i]===1?'on':''}" onclick="vote(${i},1)">同意${S.v[i]===1?'（已選）':''}</button><button class="${S.v[i]===-1?'on':''}" onclick="vote(${i},-1)">不同意${S.v[i]===-1?'（已選）':''}</button></div>`).join('')}
 function vote(i,x){S.v[i]=x;save();done('vote')}
 function reg(){const nick=$('nick').value.trim();if(!nick){alert('請輸入暱稱');return}
 S.r={nick,v:$('vil').value,no:'DP-'+String(Date.now()).slice(-6),d:new Date().toLocaleDateString('zh-TW')};save();done('reg')}
@@ -76,7 +93,7 @@ let per=P[0],sel=new Set(P[0].d);
 function lineUI(){$('personas').innerHTML=P.map((p,i)=>`<button class="chip ${p===per?'on':''}" onclick="per=P[${i}];sel=new Set(per.d);lineUI()">${p.n}</button>`).join('');
 $('needs').innerHTML=Object.keys(N).map(k=>`<button class="chip ${sel.has(k)?'on':''}" onclick="sel.has('${k}')?sel.delete('${k}'):sel.add('${k}');lineUI()">${k}</button>`).join('');
 const ok=$('kidok').checked;
-$('chat').innerHTML=`<div class="msg sys">👤 ${per.n}（虛擬）· 示範資料</div>`+[...sel].map(k=>{let [a,t]=N[k];if(k==='子女聯繫')t=ok?'您已同意：這週的健康量測摘要會傳給您登記的子女。':'⚠️ 您還沒同意通知子女，所以不會傳送任何訊息。';return `<div class="msg"><b>${a}</b>｜${k}<br>${t}</div>`}).join('');
+$('chat').innerHTML=`<div class="msg sys">${per.n}（虛擬） <span class="tag">示範資料</span></div>`+[...sel].map(k=>{let [a,t]=N[k];if(k==='子女聯繫')t=ok?'您已同意：這週的健康量測摘要會傳給您登記的子女。':'注意：您還沒同意通知子女，所以不會傳送任何訊息。';return `<div class="msg"><b>${a}</b>｜${k}<br>${t}</div>`}).join('');
 const D=[['登記鄉民（模擬）',128],['本週健康回報',86],['待追蹤：長照',12],['待追蹤：就醫接送',7],['同意通知子女',41],['農業補助提醒',53]];
 $('dash').innerHTML=D.map(([n,v])=>`<div><span>${v}</span>${n}</div>`).join('')}
 $('kidok').onchange=lineUI;lineUI();
@@ -191,9 +208,9 @@ const ins=f.interests.map(k=>INTERESTS.find(i=>i.k===k)).filter(Boolean);
 const tracks=f.role==='partner'?f.tracks.map(k=>FT.find(t=>t.k===k)).filter(Boolean):[];
 html=`<div class="pass" id="friendcard" tabindex="-1"><div>大埤之友示範證 <span class="tag">民間示範</span></div><div class="no">${esc(f.no)}</div><div>${f.role==='partner'?'參與夥伴':'一般登錄'} · ${esc(f.nick)}</div><div class="small">興趣：${ins.map(i=>i.n).join('、')||'—'}</div><div class="small">登錄日 ${esc(f.d)} · 只在這台裝置</div><div class="stamp">非鄉公所 · 非戶籍 · 無投票權 · 非法定居民 · 不承諾福利</div></div>
 <div class="friendactions"><button type="button" id="friend-edit" onclick="friendEdit()">修改興趣或角色</button></div>
-<h3>依興趣整理的示範資訊 <span class="tag">不會寄出</span></h3>
+<h3>依興趣整理的示範資訊</h3><p class="tag">不會寄出</p>
 ${ins.map(i=>`<div class="taskcard"><b>${i.n}</b><br>${i.d}</div>`).join('')||'<p class="small">尚未選興趣。</p>'}
-${f.role==='partner'?`<h3>參與夥伴任務 <span class="tag">本機勾記</span></h3>${tracks.map(t=>`<div class="taskcard"><b>${t.n}</b> · 示範 ${fmtH(t.h)} 小時<br>${t.d}<div class="friendactions"><button type="button" id="join-${t.k}" onclick="friendJoin('${t.k}')">記下一次示範參與</button><button type="button" id="map-${t.k}" onclick="friendMap('${t.b}')">看地圖上的${t.bn}</button></div></div>`).join('')}`:`<p class="small">目前是一般登錄，只看示範資訊。若要做農務、長者數位陪伴、地方產業或專業諮詢，可改為參與夥伴。</p><button type="button" id="become-partner" onclick="friendBecomePartner()">改為參與夥伴</button>`}`;
+${f.role==='partner'?`<h3>參與夥伴任務</h3><p class="tag">本機勾記</p>${tracks.map(t=>`<div class="taskcard"><b>${t.n}</b> · 示範 ${fmtH(t.h)} 小時<br>${t.d}<div class="friendactions"><button type="button" id="join-${t.k}" onclick="friendJoin('${t.k}')">記下一次示範參與</button><button type="button" id="map-${t.k}" onclick="friendMap('${t.b}')">看地圖上的${t.bn}</button></div></div>`).join('')}`:`<p class="small">目前是一般登錄，只看示範資訊。若要做農務、長者數位陪伴、地方產業或專業諮詢，可改為參與夥伴。</p><button type="button" id="become-partner" onclick="friendBecomePartner()">改為參與夥伴</button>`}`;
 }
 app.innerHTML=html;
 const form=document.getElementById('fform');
